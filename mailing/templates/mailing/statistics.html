@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Статистика</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Рассылки</h5>
+                </div>
+                <div class="card-body">
+                    <p>Всего рассылок: {{ total_mailings }}</p>
+                    <p>Активных рассылок: {{ active_mailings }}</p>
+                    <p>Завершенных рассылок: {{ completed_mailings }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Попытки отправки</h5>
+                </div>
+                <div class="card-body">
+                    <p>Успешных отправок: {{ successful_attempts }}</p>
+                    <p>Неудачных отправок: {{ failed_attempts }}</p>
+                    <p>Всего клиентов: {{ total_clients }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if total_users > 0 %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Пользователи системы</h5>
+                </div>
+                <div class="card-body">
+                    <p>Всего пользователей: {{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Попытки рассылки: {{ mailing.message.subject }}</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Дата и время</th>
+                    <th>Клиент</th>
+                    <th>Статус</th>
+                    <th>Ответ сервера</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for attempt in attempts %}
+                <tr class="{% if attempt.status == 'success' %}table-success{% else %}table-danger{% endif %}">
+                    <td>{{ attempt.attempt_time }}</td>
+                    <td>
+                        {% if attempt.client %}
+                            {{ attempt.client.full_name }} ({{ attempt.client.email }})
+                        {% else %}
+                            Общая попытка
+                        {% endif %}
+                    </td>
+                    <td>{{ attempt.get_status_display }}</td>
+                    <td>{{ attempt.server_response|truncatewords:10 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Попыток отправки пока нет</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{% url 'mailing:mailing_detail_story' mailing.pk %}" class="btn btn-secondary">
+        ← Назад к рассылке
+    </a>
+</div>
+{% endblock %}

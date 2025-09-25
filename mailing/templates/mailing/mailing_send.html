@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Отправка рассылки - Сервис рассылок{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h4 class="card-title mb-0 text-white">
+                    <i class="bi bi-send"></i>
+                    Отправка рассылки
+                </h4>
+            </div>
+            <div class="card-body">
+                <p class="lead">Вы уверены, что хотите отправить рассылку?</p>
+                
+                <div class="mailing-details mb-4">
+                    <p><strong>Рассылка #{{ mailing.id }}</strong></p>
+                    <p><strong>Тема:</strong> {{ mailing.message.subject }}</p>
+                    <p><strong>Получателей:</strong> {{ mailing.clients.count }}</p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-lg"></i>
+                            Отправить
+                        </button>
+                        <a href="{% url 'mailing:mailing_list' %}" class="btn btn-secondary">
+                            <i class="bi bi-x-lg"></i>
+                            Отмена
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

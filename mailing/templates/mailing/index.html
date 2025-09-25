@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница - Сервис рассылок{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Всего рассылок</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_mailings }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Активные рассылки</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ active_mailings }}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Уникальные клиенты</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ unique_clients }}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="{% url 'mailing:client_list' %}" class="btn btn-primary me-md-2">Управление клиентами</a>
+            <a href="{% url 'mailing:message_list' %}" class="btn btn-success me-md-2">Управление сообщениями</a>
+            <a href="{% url 'mailing:mailing_list' %}" class="btn btn-info">Управление рассылками</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
